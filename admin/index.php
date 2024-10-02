@@ -1,4 +1,4 @@
 <?php 
-        header('Location: http://localhost:8888/cake_sale/admin/html')
+        header('Location: http://localhost/cake_sale/admin/html')
 
 ?>
