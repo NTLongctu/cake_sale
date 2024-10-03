@@ -17,7 +17,7 @@ $cr_page = (isset($_GET['page']) ? $_GET['page'] : 1);
 
 $start = ($cr_page - 1) * $limit;
 
-$query2 = "SELECT * FROM Customers where Status = 1 LIMIT $start,$limit";
+$query2 = "SELECT * FROM users where Status = 1 and role = 0 LIMIT $start,$limit ";
 
 $Customers = mysqli_query($conn, $query2);
 
