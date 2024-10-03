@@ -31,7 +31,7 @@ class user_login
             $alert = "Email and Pass can't be empty";
             return $alert;
         } else {
-            $query = "SELECT * FROM customers WHERE Email = '$Email' AND Password = '$Hash_Pass' LIMIT 1";
+            $query = "SELECT * FROM users WHERE Email = '$Email' AND Password = '$Hash_Pass' LIMIT 1 AND role = 0";
             $result = $this->db->select($query);
 
             if ($result != false) {

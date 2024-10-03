@@ -26,7 +26,7 @@ class admin_reset_pass
             $alert = "Email can't be empty";
             return $alert;
         } else {
-            $query = "SELECT * FROM admin WHERE Email = '$Email' LIMIT 1";
+            $query = "SELECT * FROM users WHERE Email = '$Email' LIMIT 1";
             $result = $this->db->select($query);
         }
 
@@ -35,7 +35,7 @@ class admin_reset_pass
             $get_name = $row['Username']; 
             $get_email = $row['Email'];
 
-            $update_token = "UPDATE admin SET "
+            $update_token = "UPDATE users SET "
         }else{
             $_SESSION['status'] = "No Email Found";
             header("Location: forgot_password.php");

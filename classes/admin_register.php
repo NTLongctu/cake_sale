@@ -26,12 +26,12 @@ class admin_register
             $alert = "<span class = 'error'>Fields must not be empty</span>";
             return $alert;
         }else{
-            $check_Email = "SELECT * FROM admin WHERE Email='$Email' LIMIT 1";
+            $check_Email = "SELECT * FROM users WHERE Email='$Email' LIMIT 1";
             $result_check = $this->db->select($check_Email);
             if($result_check){
                 $alert = "<span class = 'error'>Email already existed</span>";
             }else{
-                $query = "INSERT INTO admin(Username,Email,Password,Role) VALUES('$Username','$Email','$Hash_Pass','2')";
+                $query = "INSERT INTO users(Fullname,Email,Password,Role) VALUES('$Username','$Email','$Hash_Pass','1')";
                 $result = $this->db->insert($query);
                 if($result){
                     $alert = "<span class = 'success'>Register succesfully</span>";
