@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2024 at 11:11 AM
+-- Generation Time: Oct 03, 2024 at 06:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`Id`, `Username`, `Email`, `Password`, `Role`) VALUES
-(4, 'admin', 'admin@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 2);
+(4, 'admin', 'test@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 2);
 
 -- --------------------------------------------------------
 
@@ -106,7 +106,7 @@ CREATE TABLE `contacts` (
 
 CREATE TABLE `customers` (
   `CustomerId` int(11) NOT NULL,
-  `Fullname` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Fullname` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
   `Image` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `PhoneNumber` char(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `Address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -122,9 +122,8 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`CustomerId`, `Fullname`, `Image`, `PhoneNumber`, `Address`, `Status`, `Email`, `Password`, `Date_Login`, `Date_Logout`) VALUES
-(12, 'nguyen dinh hung', '', '', '', 0, '16.05.01h@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', '2023-04-05 10:32:56', '2023-04-05 10:35:27'),
 (14, 'an', '', '', '', 0, 'an@gmail.com', 'c20ad4d76fe97759aa27a0c99bff6710', '2024-09-19 22:01:19', '0000-00-00 00:00:00'),
-(15, 'nghia', '', '', '', 1, 'admin@gmail.com', '202cb962ac59075b964b07152d234b70', '2024-10-02 11:03:16', '0000-00-00 00:00:00');
+(15, 'nghia', '', '', '', 1, 'test@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', '2024-10-03 00:59:49', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -158,7 +157,9 @@ INSERT INTO `oders` (`OderId`, `CustomerId`, `Note`, `order_date`, `address`, `n
 (143, 15, ' ', '2024-10-01 16:59:25', 'cần thơ', '0123456789', 2, 145000),
 (144, 15, ' ', '2024-10-01 17:36:47', 'cần thơ', '0123456789', 0, 145000),
 (145, 15, ' ', '2024-10-02 11:02:47', 'cần thơ', '0123456789', 0, 125000),
-(146, 15, ' ', '2024-10-02 11:48:11', 'cần thơ', '0123456789', 0, 125000);
+(146, 15, ' ', '2024-10-02 11:48:11', 'cần thơ', '0123456789', 0, 125000),
+(147, 15, ' na', '2024-10-03 01:00:42', '20', '012345678', 0, 125000),
+(151, 15, ' na', '2024-10-03 23:19:52', '123', '123456789', 0, 250000);
 
 -- --------------------------------------------------------
 
@@ -226,7 +227,9 @@ INSERT INTO `orderdetails` (`Order_Detail_Id`, `Status`, `Price`, `Quantity`, `P
 (143, 1, 145000, 1, 36),
 (144, 1, 145000, 1, 36),
 (145, 1, 125000, 1, 34),
-(146, 1, 125000, 1, 34);
+(146, 1, 125000, 1, 34),
+(147, 1, 125000, 1, 34),
+(151, 1, 125000, 2, 34);
 
 -- --------------------------------------------------------
 
@@ -299,6 +302,36 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`RoleId`, `Name`, `Description`) VALUES
 (1, 'Admin', 'Control everything'),
 (2, 'SubAdmin', 'Control less than Admin\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `CustomerId` int(11) NOT NULL,
+  `Fullname` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `role` tinyint(3) NOT NULL DEFAULT 0,
+  `Image` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `PhoneNumber` char(15) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Address` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Status` tinyint(1) NOT NULL DEFAULT 1,
+  `Email` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Password` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `Date_Login` datetime NOT NULL,
+  `Date_Logout` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`CustomerId`, `Fullname`, `role`, `Image`, `PhoneNumber`, `Address`, `Status`, `Email`, `Password`, `Date_Login`, `Date_Logout`) VALUES
+(14, 'an', 0, '', '', '', 0, 'an@gmail.com', 'c20ad4d76fe97759aa27a0c99bff6710', '2024-09-19 22:01:19', '0000-00-00 00:00:00'),
+(15, 'nghia', 0, '', '', '', 1, 'test@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', '2024-10-03 23:19:27', '0000-00-00 00:00:00'),
+(16, 'Long', 0, '', '', '', 1, 'test1@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', '2024-10-03 23:18:16', '2024-10-03 23:19:23'),
+(17, 'tester', 1, '', '', '', 1, 'admin@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -384,6 +417,12 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`RoleId`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`CustomerId`);
+
+--
 -- Indexes for table `wishlist`
 --
 ALTER TABLE `wishlist`
@@ -429,7 +468,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `oders`
 --
 ALTER TABLE `oders`
-  MODIFY `OderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=147;
+  MODIFY `OderId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -448,6 +487,12 @@ ALTER TABLE `receipts`
 --
 ALTER TABLE `roles`
   MODIFY `RoleId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `CustomerId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `wishlist`
